@@ -1,7 +1,13 @@
+import Bannercarosal from "../components/storefront/Bannercarosal";
+import CategorySelection from "../components/storefront/CategoriesSelection";
+import Featiredproducts from "../components/storefront/Feturedproducts";
 
-
-export default function Main(){
-    return (
-        <h1>hellli from the page</h1>
-    )
-} 
+export default function Main() {
+  return (
+    <>
+      <Bannercarosal />
+      <CategorySelection />
+      <Featiredproducts/>
+    </>
+  );
+}

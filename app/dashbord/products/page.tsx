@@ -77,6 +77,7 @@ export default async function ProductsPage() {
                       alt="prodcut image"
                       height={100}
                       width={100}
+
                     />
                   </TableCell>
                   <TableCell>{product.name}</TableCell>

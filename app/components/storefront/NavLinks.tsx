@@ -9,17 +9,22 @@ const links = [
   {
     id: "1",
     name: "All products",
-    href: "/products/all",
+    href: "/porducts/all",
   },
   {
     id: "2",
     name: "Men",
-    href: "/prducts/men",
+    href: "/porducts/men",
   },
   {
     id: "3",
     name: "Women",
-    href: "/products/women",
+    href: "/porducts/women",
+  },
+  {
+    id: "4",
+    name: "kids",
+    href: "/porducts/kid",
   },
 ];
 
