@@ -80,7 +80,7 @@ export default function Createbanner() {
                 />
 
                 {image ? (
-                  <Image src={image} alt="banner" width={200} height={200} className="rounded-lg object-cover " />
+                  <Image  src={image} alt="banner" width={200} height={200} className="rounded-lg object-cover " />
                 ) : (
                   <UploadDropzone
                     endpoint="imagebannerupload"

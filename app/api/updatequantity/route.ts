@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
   } else {
+   
     return NextResponse.json({ message: "Cart is empty" }, { status: 400 });
   }
 }

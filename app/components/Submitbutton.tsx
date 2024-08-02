@@ -67,3 +67,20 @@ export const Deletbutton = () => {
   );
 };
 
+export function Checkoutbtn() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+      {pending ? (
+        <Button disabled className=" w-full mt-2 " size="lg">
+          <Loader2 className=" mr-2 h-4 w-4 animate-spin " />
+          Processing....
+        </Button>
+      ) : (
+        <Button className=" w-full mt-2 " size="lg">
+          Checkout
+        </Button>
+      )}
+    </>
+  );
+}

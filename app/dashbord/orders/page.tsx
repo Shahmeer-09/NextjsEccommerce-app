@@ -1,3 +1,4 @@
+import prisma from "@/app/lib/db";
 import {
   Card,
   CardContent,
@@ -13,8 +14,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-export default function OrdersPage() {
+const getData = async () => {
+  const data = await prisma.order.findMany({
+    select: {
+      id: true,
+      status: true,
+      amount: true,
+      createdAt: true,
+      owner: {
+        select: {
+          firstName: true,
+          email: true,
+        },
+      },
+    },
+  });
+  return data;
+};
+export default async function OrdersPage() {
+  const data = await getData();
   return (
     <>
       <Card>
@@ -34,16 +52,21 @@ export default function OrdersPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  <p className="font-medium " >Dave gray</p>
-                  <p className="font-medium text-muted-foreground">dave@test.com</p>
-                </TableCell>
-                <TableCell>Sale</TableCell>
-                <TableCell>succesful</TableCell>
-                <TableCell>2024-07-09</TableCell>
-                <TableCell className="text-right">+$250</TableCell>
-              </TableRow>
+             {data?.map(item=>(
+              <TableRow key={item.id} >
+              <TableCell>
+                <p className="font-medium ">{item.owner?.firstName}</p>
+                <p className="font-medium text-muted-foreground">
+                   {item.owner?.email}
+                </p>
+              </TableCell>
+              <TableCell>Order</TableCell>
+              <TableCell>{item.status}</TableCell>
+              <TableCell>{new Intl.DateTimeFormat().format(item.createdAt)}</TableCell>
+              <TableCell className="text-right">+${new Intl.NumberFormat("en-Us").format(item.amount/100)}</TableCell>
+            </TableRow>
+             ))}
+              
             </TableBody>
           </Table>
         </CardContent>

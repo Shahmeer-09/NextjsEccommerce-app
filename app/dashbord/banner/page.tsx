@@ -67,7 +67,7 @@ export default async function Banner() {
                 data && data.map(banner=>(
                     <TableRow>
                     <TableCell>
-                      <Image src={banner.imageBanner} alt="banner" height={100} width={100} className="rounded-lg" />
+                      <Image   src={banner.imageBanner} alt="banner" height={100} width={100} className="rounded-lg" />
                     </TableCell>
                     <TableCell>{banner.title}</TableCell>
                     <TableCell className="text-right">

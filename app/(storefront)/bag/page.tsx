@@ -1,6 +1,6 @@
-import { DeleteItem } from "@/app/Actions";
+import { createOrder, DeleteItem } from "@/app/Actions";
 import QuantityInput from "@/app/components/storefront/Bagquanity";
-import { Deletbutton } from "@/app/components/Submitbutton";
+import { Checkoutbtn, Deletbutton } from "@/app/components/Submitbutton";
 import { Cart } from "@/app/lib/interfaces";
 import redis from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ export default async function Bag() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   if (!user) {
-    return redirect("/");
+    redirect("/");
   }
   const cart: Cart | null = await redis.get(`cart-${user.id}`);
   let total = 0;
@@ -24,7 +24,7 @@ export default async function Bag() {
   });
   return (
     <div className=" min-h-[60vh]   max-w-2xl mx-auto  mt-10 ">
-      {cart?.items.length == 0 ? (
+      {!cart|| cart?.items.length == 0 ? (
         <div className="min-h-[350px]  flex-col mb-4 rounded-lg border-dashed border-2 border-blue-200 flex items-center justify-center  ">
           <div className=" h-10 w-10 text-blue-600 " >
             <ShoppingBag  className="h-10 w-10" />
@@ -42,7 +42,7 @@ export default async function Bag() {
           {cart?.items &&
             cart.items.map((item) => (
               <div key={item.id} className="flex mt-5 ">
-                <div className="h-24 w-32 sm:w-40 sm:h-32 relative">
+                <div className="h-24 w-32 sm:w-32 sm:h-26 relative">
                   <Image
                     className="object-cover"
                     src={item?.images}
@@ -55,7 +55,7 @@ export default async function Bag() {
                     {item.name}
                   </p>
                   <div className="flex flex-col h-full  justify-around ">
-                    <div className="gap-2 text-xs flex ">
+                    <div className="gap-2 text-sm flex ">
                       <QuantityInput
                         prodid={item.id}
                         quantity={item.quantity}
@@ -72,12 +72,13 @@ export default async function Bag() {
               </div>
             ))}
           <div className="flex justify-between mt-8 font-bold">
-            <p>Total</p>
-            <p>${new Intl.NumberFormat("en-Us").format(total)}</p>
+            <p className="text-lg" >Total</p>
+            <p className="text-lg">${new Intl.NumberFormat("en-Us").format(total)}</p>
           </div>
-          <Button className=" w-full mt-2 " size="lg">
-            Checkout
-          </Button>
+          <form action={createOrder}>
+             <Checkoutbtn/>
+          </form>
+       
         </div>
       )}
     </div>

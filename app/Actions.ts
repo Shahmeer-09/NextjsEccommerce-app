@@ -7,8 +7,10 @@ import prisma from "./lib/db";
 import { redirect } from "next/navigation";
 import redis from "./lib/redis";
 import { Cart } from "./lib/interfaces";
-import { use } from "react";
 import { revalidatePath } from "next/cache";
+import { stripe } from "./lib/stripe";
+import { metadata } from "./layout";
+
 export async function createProduct(currentState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -193,4 +195,39 @@ export async function DeleteItem(formData: FormData) {
     await redis.set(`cart-${user.id}`, mycart);
   }
   revalidatePath("/bag");
+}
+
+export async function createOrder() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  if (!user) {
+    redirect("/");
+  }
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
+  if (!cart || cart.items.length === 0) {
+    throw new Error("cart is empty");
+  }
+  const line_items = cart.items.map((item) => {
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
+          images: [item.images],
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: item.quantity,
+    };
+  });
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: "payment",
+    success_url: `http://localhost:3000/payment/success`,
+    cancel_url: `http://localhost:3000/payment/cancel`,
+    metadata: {
+      userId: user.id,
+    },
+  });
+  redirect(session.url);
 }
