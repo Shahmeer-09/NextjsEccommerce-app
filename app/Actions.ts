@@ -223,8 +223,8 @@ export async function createOrder() {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: `https://nextjs-eccommerce-4ozjv2srw-shahmeers-projects-90ee6c2b.vercel.app/payment/success`,
-    cancel_url: `https://nextjs-eccommerce-4ozjv2srw-shahmeers-projects-90ee6c2b.vercel.app/payment/cancel`,
+    success_url: `https://nextjs-eccommerce-app.vercel.app/payment/success`,
+    cancel_url: `https://nextjs-eccommerce-app.vercel.app/payment/cancel`,
     metadata: {
       userId: user.id,
     },
