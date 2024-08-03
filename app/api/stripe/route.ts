@@ -1,10 +1,11 @@
 import prisma from "@/app/lib/db";
 import redis from "@/app/lib/redis";
 import { stripe } from "@/app/lib/stripe";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { unstable_noStore } from "next/cache";
 import { headers } from "next/headers";
 
 export async function POST(request: Request) {
+  unstable_noStore()
   let body =await request.text();
  
   const signature = headers().get("Stripe-Signature");
