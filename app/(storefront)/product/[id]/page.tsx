@@ -3,12 +3,12 @@ import Featiredproducts from "@/app/components/storefront/Feturedproducts";
 import Imageslider from "@/app/components/storefront/Imageslider";
 import { Addtocartbtn } from "@/app/components/Submitbutton";
 import prisma from "@/app/lib/db";
-import { unstable_noStore as noStore } from 'next/cache';
-import { StarIcon } from "lucide-react";
+import { unstable_noStore as noStore } from "next/cache";
+import { ShoppingBag, StarIcon } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Button } from "@/components/ui/button";
 
 const getProduct = async (prid: string) => {
-
   await new Promise((resolve) => setTimeout(resolve, 5000));
   const data = await prisma.product.findUnique({
     where: {
@@ -26,10 +26,9 @@ const getProduct = async (prid: string) => {
 };
 
 export default async function Product({ params }: { params: { id: string } }) {
-
-  noStore()
-  const {getUser} = getKindeServerSession()
-  const user = await getUser()
+  noStore();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   const data = await getProduct(params.id);
   return (
     <div>
@@ -54,8 +53,13 @@ export default async function Product({ params }: { params: { id: string } }) {
           </p>
           <form action={addItem}>
             <input type="text" hidden name="prodid" value={data?.id} />
-
-            <Addtocartbtn user={user} />
+            {!user ? (
+              <Button disabled size="lg" className="w-full mt-4 ">
+                Add to cart <ShoppingBag className="ml-2 h-4 w-4" />
+              </Button>
+            ) : (
+              <Addtocartbtn />
+            )}
           </form>
         </div>
       </div>
