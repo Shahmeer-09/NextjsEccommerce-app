@@ -54,7 +54,7 @@ export default async function Product({ params }: { params: { id: string } }) {
           <form action={addItem}>
             <input type="text" hidden name="prodid" value={data?.id} />
             {!user ? (
-              <Button disabled size="lg" className="w-full mt-4 ">
+              <Button disabled={true} size="lg" className="w-full mt-4 ">
                 Add to cart <ShoppingBag className="ml-2 h-4 w-4" />
               </Button>
             ) : (
