@@ -48,7 +48,7 @@ export default function Featiredproducts() {
         Featured products
       </h2>
       <div className=" grid grid-cols-1 my-6  lg:grid-cols-3 sm:grid-cols-2 gap-4 ">
-        {data.map((item) => (
+        {data.map((item:any) => (
           <ProductCard key={item.id} item={item} />
         ))}
       </div>
