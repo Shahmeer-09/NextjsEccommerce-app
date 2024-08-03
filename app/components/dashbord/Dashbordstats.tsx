@@ -16,7 +16,7 @@ const getData = async () => {
 };
 export default async function Dashbordstats() {
   const data = await getData();
-  const Revenue = data.order.reduce((acc:number, curr) => acc + curr.amount, 0);
+  const Revenue = data.order.reduce((acc:number, curr:{amount:number}) => acc + curr.amount, 0);
   return (
     <div className=" grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4  ">
       <Card>

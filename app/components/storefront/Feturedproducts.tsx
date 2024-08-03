@@ -2,7 +2,7 @@ import prisma from "@/app/lib/db";
 import { string } from "zod";
 import ProductCard from "./ProductCard.";
 import { Suspense } from "react";
-import { Categoryloading } from "@/app/(storefront)/porducts/[name]/page";
+import Categoryloading from "./Loadingskeletons/CategoryLoading";
 
 
 const getFeaturedProducts = async () => {
