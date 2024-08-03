@@ -22,7 +22,7 @@ export default async function Bannercarosal() {
     <Carousel>
       <CarouselContent>
         {data.map((item: any) => (
-          <CarouselItem>
+          <CarouselItem key={item.id} >
             <div className=" relative  h-[60vh] lg:h-[80vh] rounded-xl  ">
               <Image
                 alt="Banner"
