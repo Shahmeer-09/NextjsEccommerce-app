@@ -28,5 +28,5 @@ export async function GET() {
     });
   }
 
-  return NextResponse.redirect("https://nextjs-eccommerce-4ozjv2srw-shahmeers-projects-90ee6c2b.vercel.app")
+  return NextResponse.redirect("https://nextjs-eccommerce-app.vercel.app")
 };
