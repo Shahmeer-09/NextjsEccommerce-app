@@ -20,13 +20,13 @@ export const Addtocartbtn = ({user}:{user:any}) => {
   const { pending } = useFormStatus();
   return (
     <>
-      {pending || !user? (
+      {pending? (
         <Button disabled size="lg" className="w-full mt-4">
           please wait
           <Loader2 className="ml-2 h-4 w-4 animate-spin" />
         </Button>
       ) : (
-        <Button size="lg" className="w-full mt-4 ">
+        <Button disabled={user} size="lg" className="w-full mt-4 ">
           Add to cart <ShoppingBag className="ml-2 h-4 w-4" />
         </Button>
       )}
