@@ -30,16 +30,17 @@ import { useFormState } from "react-dom";
 import { useState } from "react";
 import Image from "next/image";
 import { Submitbutton } from "@/app/components/Submitbutton";
-import { $Enums } from "@prisma/client";
 
+type status  = "draft"|"published"|"archieved"
+type categ  = "men"|"women"|"kid"
 interface editproductprops {
   data: {
     id: string;
     name: string;
     description: string;
-    status: $Enums.ProductStatus;
+    status:status
     price: number;
-    category: $Enums.category;
+    category: categ
     images: string[];
     isFeatured:Boolean
     createdAt: Date;

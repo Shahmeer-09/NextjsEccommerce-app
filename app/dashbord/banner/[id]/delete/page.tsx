@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 export default function Deletebanner({ params }: { params: { id: string } }) {
   return (
     <div className=" flex h-[80vh] items-center justify-center ">
