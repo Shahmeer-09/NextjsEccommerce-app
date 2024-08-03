@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export const Categoryloading=()=>{
+export default function Categoryloading(){
     return(
       <div className="flex flex-col"  >
         <Skeleton  className="h-[330px] w-full"    />
