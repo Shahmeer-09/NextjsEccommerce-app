@@ -26,7 +26,7 @@ import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import { MoreHorizontal, PlusCircle, User2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { unstable_noStore as noStore } from "next/cache";
 const getBanner = async () => {
   const banner = await prisma.banner.findMany({
     orderBy: {
@@ -37,8 +37,9 @@ const getBanner = async () => {
 };
 
 export default async function Banner() {
-    const data  = await getBanner()
-   return (
+  noStore();
+  const data = await getBanner();
+  return (
     <>
       <div className="flex justify-end p-2">
         <Button asChild>
@@ -63,11 +64,17 @@ export default async function Banner() {
               </TableRow>
             </TableHeader>
             <TableBody>
-             {
-                data && data.map(banner=>(
-                    <TableRow>
+              {data &&
+                data.map((banner) => (
+                  <TableRow>
                     <TableCell>
-                      <Image   src={banner.imageBanner} alt="banner" height={100} width={100} className="rounded-lg" />
+                      <Image
+                        src={banner.imageBanner}
+                        alt="banner"
+                        height={100}
+                        width={100}
+                        className="rounded-lg"
+                      />
                     </TableCell>
                     <TableCell>{banner.title}</TableCell>
                     <TableCell className="text-right">
@@ -80,15 +87,19 @@ export default async function Banner() {
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className=" cursor-pointer " asChild>
-                            <Link href={`/dashbord/banner/${banner.id}/delete`}>Delete</Link>
+                          <DropdownMenuItem
+                            className=" cursor-pointer "
+                            asChild
+                          >
+                            <Link href={`/dashbord/banner/${banner.id}/delete`}>
+                              Delete
+                            </Link>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
                   </TableRow>
-                ))
-             }
+                ))}
             </TableBody>
           </Table>
         </CardContent>

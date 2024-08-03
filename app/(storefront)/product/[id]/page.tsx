@@ -3,10 +3,11 @@ import Featiredproducts from "@/app/components/storefront/Feturedproducts";
 import Imageslider from "@/app/components/storefront/Imageslider";
 import { Addtocartbtn } from "@/app/components/Submitbutton";
 import prisma from "@/app/lib/db";
-import { Button } from "@/components/ui/button";
+import { unstable_noStore as noStore } from 'next/cache';
 import { ShoppingBag, StarIcon } from "lucide-react";
 
 const getProduct = async (prid: string) => {
+
   await new Promise((resolve) => setTimeout(resolve, 5000));
   const data = await prisma.product.findUnique({
     where: {
@@ -24,6 +25,7 @@ const getProduct = async (prid: string) => {
 };
 
 export default async function Product({ params }: { params: { id: string } }) {
+  noStore()
   const data = await getProduct(params.id);
   return (
     <div>

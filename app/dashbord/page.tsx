@@ -9,8 +9,9 @@ import Dashbordstats from "../components/dashbord/Dashbordstats";
 import { Recentsales } from "../components/dashbord/Recentsales";
 import prisma from "../lib/db";
 import {Chart} from "../components/dashbord/Chart";
-
+import { unstable_noStore as noStore } from 'next/cache';
 const getData = async () => {
+ 
   const current = new Date();
   const sevendays = new Date(current.setDate(current.getDate() - 7));
   const data = await prisma.order.groupBy({
@@ -30,6 +31,7 @@ const getData = async () => {
   }));
 };
 export default async function dasbord() {
+  noStore()
   const data = await getData();
   return (
     <>

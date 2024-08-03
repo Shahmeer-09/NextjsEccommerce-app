@@ -28,7 +28,7 @@ import {
 import { MoreHorizontal, PlusIcon, User2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { unstable_noStore as noStore } from 'next/cache';
  async function getProducts() {
   const products = await prisma.product.findMany({
     orderBy: {
@@ -38,6 +38,7 @@ import Link from "next/link";
   return products;
 }
 export default async function ProductsPage() {
+  noStore()
   const productsfound = await getProducts();
   return (
     <>
