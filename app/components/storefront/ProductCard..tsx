@@ -25,7 +25,7 @@ export default function ProductCard({ item }: prodprops) {
     <div className="rounded-lg">
       <Carousel>
         <CarouselContent>
-          {item.images.map((image, index) => (
+          {item.images.map((image:string, index) => (
             <CarouselItem key={image}>
               <div key={image} className="relative h-[330px]">
                 <Image

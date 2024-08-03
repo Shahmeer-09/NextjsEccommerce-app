@@ -54,7 +54,7 @@ export default async function OrdersPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-             {data?.map(item=>(
+             {data?.map((item:any)=>(
               <TableRow key={item.id} >
               <TableCell>
                 <p className="font-medium ">{item.owner?.firstName}</p>

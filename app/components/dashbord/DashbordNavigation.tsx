@@ -26,7 +26,7 @@ export function DashbordNavigation() {
   const pathname = usePathname();
   return (
     <>
-      {Links.map((item) => (
+      {Links.map((item:any) => (
         <Link
           href={item.path}
           key={item.name}

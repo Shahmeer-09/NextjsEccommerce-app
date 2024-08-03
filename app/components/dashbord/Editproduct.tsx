@@ -172,7 +172,7 @@ export default function Editproduct({data}:editproductprops) {
                 />
                 {images.length > 0 ? (
                   <div className=" flex gap-3 ">
-                    {images.map((img, i) => (
+                    {images.map((img:string, i) => (
                       <div key={i} className="w-[100px]  relative h-[100px]">
                         <Image
                           height={100}

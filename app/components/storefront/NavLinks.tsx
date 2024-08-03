@@ -31,7 +31,7 @@ const links = [
 export default function Navlinks() {
   return (
     <div  className="hidden md:flex   items-center  ml-8 gap-x-3">
-      {links.map((link) => (
+      {links.map((link:any) => (
         <Link className=" font-semibold "  key={link.id} href={link.href}>
           {link.name}
         </Link>

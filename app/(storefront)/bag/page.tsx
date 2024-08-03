@@ -41,7 +41,7 @@ export default async function Bag() {
       ) : (
         <div className="flex flex-col mb-10 ">
           {cart?.items &&
-            cart.items.map((item) => (
+            cart.items.map((item:any) => (
               <div key={item.id} className="flex mt-5 ">
                 <div className="h-24 w-32 sm:w-32 sm:h-26 relative">
                   <Image

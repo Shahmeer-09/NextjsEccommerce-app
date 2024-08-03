@@ -65,7 +65,7 @@ export default async function Banner() {
             </TableHeader>
             <TableBody>
               {data &&
-                data.map((banner) => (
+                data.map((banner:any) => (
                   <TableRow key={banner.id} >
                     <TableCell>
                       <Image

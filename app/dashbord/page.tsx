@@ -25,7 +25,7 @@ const getData = async () => {
       amount: true,
     },
   });
-  return data.map((item) => ({
+  return data.map((item:any) => ({
     date: new Intl.DateTimeFormat("en-US").format(item.createdAt),
     revenue: item._sum?.amount ? item._sum.amount / 100 : 0
   }));

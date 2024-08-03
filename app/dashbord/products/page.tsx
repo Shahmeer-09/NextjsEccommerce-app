@@ -70,7 +70,7 @@ export default async function ProductsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {productsfound.length > 0 &&  productsfound.map((product) => (
+              {productsfound.length > 0 &&  productsfound.map((product:any) => (
                 <TableRow key={product.id} >
                   <TableCell>
                     <Image

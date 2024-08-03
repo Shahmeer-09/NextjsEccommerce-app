@@ -47,7 +47,7 @@ export default function Imageslider({ images }: { images: string[] }) {
           </div>
         </div>
         <div className="flex  gap-2">
-          {images.map((img, index) => (
+          {images.map((img:string, index) => (
             <div onClick={()=>setmainimageindex(index)}  key={img} className={cn( mainimageindex==index? "border-2 border-primary":"border-2 border-zinc-400", "rounded-lg overflow-hidden " )} >
               <Image
                 className=" h-[100px] w-[100px]"
