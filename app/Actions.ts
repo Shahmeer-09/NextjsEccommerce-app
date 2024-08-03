@@ -130,7 +130,7 @@ export async function deleteBanner(formData: FormData) {
 export async function addItem(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  if (!user || user.email !== "shameersheikh420@gmail.com") {
+  if (!user) {
     throw new Error("user is not authorized");
   }
 
