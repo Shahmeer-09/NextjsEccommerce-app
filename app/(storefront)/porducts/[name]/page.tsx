@@ -108,7 +108,7 @@ export default async function Cateogory({
 }
 
 
-export  function Categoryloading(){
+export const Categoryloading=()=>{
   return(
     <div className="flex flex-col"  >
       <Skeleton  className="h-[330px] w-full"    />
