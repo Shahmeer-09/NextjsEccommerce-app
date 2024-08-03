@@ -10,8 +10,10 @@ import { Button } from "@/components/ui/button";
 import UserDropdown from "./UserDropdown";
 import { Cart } from "@/app/lib/interfaces";
 import redis from "@/app/lib/redis";
+import { unstable_noStore } from "next/cache";
 
 export default async function Navbar() {
+  unstable_noStore()
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const cart: Cart | null = await redis.get(`cart-${user?.id}`);

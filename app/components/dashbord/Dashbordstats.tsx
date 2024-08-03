@@ -1,6 +1,8 @@
 import prisma from "@/app/lib/db";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { unstable_Control } from "@conform-to/react";
 import { DollarSign, PartyPopper, ShoppingCart, User2 } from "lucide-react";
+import { unstable_noStore } from "next/cache";
 const getData = async () => {
     const [ users ,product, order ] =  await Promise.all([
         prisma.user.findMany(),
@@ -15,6 +17,7 @@ const getData = async () => {
   return { users , product, order };
 };
 export default async function Dashbordstats() {
+  unstable_noStore()
   const data = await getData();
   const Revenue = data.order.reduce((acc:number, curr:{amount:number}) => acc + curr.amount, 0);
   return (

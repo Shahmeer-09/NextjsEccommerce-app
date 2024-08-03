@@ -6,6 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { unstable_Control } from "@conform-to/react";
+import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 const getbanner = async () => {
   const data = await prisma.banner.findMany({
@@ -16,6 +18,7 @@ const getbanner = async () => {
   return data;
 };
 export default async function Bannercarosal() {
+  unstable_noStore()
   const data = await getbanner();
 
   return (

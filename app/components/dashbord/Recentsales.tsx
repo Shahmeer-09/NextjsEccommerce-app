@@ -2,6 +2,7 @@ import prisma from "@/app/lib/db";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { unstable_noStore } from "next/cache";
 const getData = async () => {
   const data = await prisma.order.findMany({
     select: {
@@ -25,6 +26,7 @@ const getData = async () => {
   return data;
 };
 export async function Recentsales() {
+  unstable_noStore()
   const data = await getData();
   return (
     <Card className="">
