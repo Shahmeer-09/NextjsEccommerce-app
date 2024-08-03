@@ -16,11 +16,11 @@ interface submitbuttonprops {
     | undefined;
 }
 
-export const Addtocartbtn = () => {
+export const Addtocartbtn = ({user}:{user:any}) => {
   const { pending } = useFormStatus();
   return (
     <>
-      {pending ? (
+      {pending || !user? (
         <Button disabled size="lg" className="w-full mt-4">
           please wait
           <Loader2 className="ml-2 h-4 w-4 animate-spin" />

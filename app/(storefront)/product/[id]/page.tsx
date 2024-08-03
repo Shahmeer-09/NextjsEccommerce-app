@@ -4,7 +4,8 @@ import Imageslider from "@/app/components/storefront/Imageslider";
 import { Addtocartbtn } from "@/app/components/Submitbutton";
 import prisma from "@/app/lib/db";
 import { unstable_noStore as noStore } from 'next/cache';
-import { ShoppingBag, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const getProduct = async (prid: string) => {
 
@@ -25,7 +26,10 @@ const getProduct = async (prid: string) => {
 };
 
 export default async function Product({ params }: { params: { id: string } }) {
+
   noStore()
+  const {getUser} = getKindeServerSession()
+  const user = await getUser()
   const data = await getProduct(params.id);
   return (
     <div>
@@ -50,7 +54,8 @@ export default async function Product({ params }: { params: { id: string } }) {
           </p>
           <form action={addItem}>
             <input type="text" hidden name="prodid" value={data?.id} />
-            <Addtocartbtn />
+
+            <Addtocartbtn user={user} />
           </form>
         </div>
       </div>
