@@ -1,8 +1,16 @@
 import ProductCard from "@/app/components/storefront/ProductCard.";
 import prisma from "@/app/lib/db";
 import { notFound } from "next/navigation";
-
 import { unstable_noStore as noStore } from 'next/cache';
+interface  datatype{
+ 
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    images: string[];
+}[]
+
 const getProducts = async (categ: string) => {
   switch (categ) {
     case "all": {
@@ -98,7 +106,7 @@ export default async function Cateogory({
     <div>
       <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
       <div className="mt-6  grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 md:gap-6 lg:gap-8 ">
-        {data.map(data=>(
+        {data.map((data:datatype)=>(
           <ProductCard key={data.id} item={data} />
         ))}
       </div>
