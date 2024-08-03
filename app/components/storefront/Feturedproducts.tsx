@@ -3,6 +3,8 @@ import { string } from "zod";
 import ProductCard from "./ProductCard.";
 import { Suspense } from "react";
 import Categoryloading from "./Loadingskeletons/CategoryLoading";
+import { unstable_Control } from "@conform-to/react";
+import { unstable_noStore } from "next/cache";
 
 
 const getFeaturedProducts = async () => {
@@ -38,6 +40,7 @@ export default function Featiredproducts() {
 }
 
   async function FeatureData(){
+    unstable_noStore()
   const data = await getFeaturedProducts();
   return (
     <>
