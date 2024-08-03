@@ -2,7 +2,6 @@ import Categoryloading from "@/app/components/storefront/Loadingskeletons/Catego
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  // You can add any UI inside Loading, including a Skeleton.
   return (
     <>
       <Skeleton className=" h-8 w-56 " />

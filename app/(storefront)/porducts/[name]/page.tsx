@@ -1,8 +1,7 @@
 import ProductCard from "@/app/components/storefront/ProductCard.";
 import prisma from "@/app/lib/db";
-import { Skeleton } from "@/components/ui/skeleton";
 import { notFound } from "next/navigation";
-import { resolve } from "path";
+
 import { unstable_noStore as noStore } from 'next/cache';
 const getProducts = async (categ: string) => {
   switch (categ) {
