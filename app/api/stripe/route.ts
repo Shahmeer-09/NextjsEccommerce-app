@@ -16,14 +16,13 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.log(error);
-    return new Response("unknown Error", { status: 400 });
+    return Response.json({msg:"unknown Error"}, { status: 400 });
   }
 
 
   switch (event.type) {
     case "checkout.session.completed":
       const session = event?.data?.object;
-       console.log(session.metadata.userId);
       await prisma.order.create({
         data: {
           amount: session.amount_total,

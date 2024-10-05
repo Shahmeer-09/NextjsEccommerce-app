@@ -28,5 +28,5 @@ export async function GET() {
     });
   }
 
-  return NextResponse.redirect("https://nextjs-eccommerce-app.vercel.app")
+  return NextResponse.redirect("/")
 };

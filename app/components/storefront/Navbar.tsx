@@ -13,11 +13,14 @@ import redis from "@/app/lib/redis";
 import { unstable_noStore } from "next/cache";
 
 export default async function Navbar() {
-  unstable_noStore()
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const cart: Cart | null = await redis.get(`cart-${user?.id}`);
-  const count = cart?.items?.reduce((acc, item) => acc + item.quantity, 0) ?? 0;
+  let count;
+  if (user) {
+    const cart: Cart | null = await redis.get(`cart-${user?.id}`);
+    count = cart?.items?.reduce((acc, item) => acc + item.quantity, 0) ?? 0;
+  }
   return (
     <nav className="  px-4 sm:px-6 lg:px-8 py-4 max-w-7xl  w-full flex justify-between items-center  px ">
       <div className="flex  items-center">
