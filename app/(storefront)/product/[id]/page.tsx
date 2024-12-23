@@ -9,7 +9,6 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Button } from "@/components/ui/button";
 
 const getProduct = async (prid: string) => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   const data = await prisma.product.findUnique({
     where: {
       id: prid,
@@ -22,6 +21,7 @@ const getProduct = async (prid: string) => {
       images: true,
     },
   });
+  console.log("hhelo")
   return data;
 };
 
